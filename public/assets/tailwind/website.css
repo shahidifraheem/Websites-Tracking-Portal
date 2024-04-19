@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  font-family: "Rubik", sans-serif;
+}
+
+:root {
+  --primary-color: #1d305b;
+  --primary-hover-color: #8eb7e1;
+  --secondary-color: #6bc17c;
+  --secondary-hover-color: #80cf66;
+  --dark-color: rgb(24, 22, 22);
+  --white-color: rgb(255, 255, 255);
+}
+
+.wrapper {
+  @apply w-full max-w-[1400px] mx-auto sm:px-4 px-8;
+}
+
+.wrapper-content {
+  @apply flex items-center flex-wrap justify-center;
+}
+
+.padding-y {
+  @apply py-6 md:py-12;
+}
+
+.margin-y {
+  @apply my-6 md:my-12;
+}
+
+.site-logo {
+  @apply py-5;
+}
+
+.title {
+  color: var(--primary-color);
+  @apply text-4xl font-bold text-center mb-2;
+}
+
+input:not(input[type="submit"]) {
+  border: 1px solid var(--primary-color);
+  outline-color: var(--primary-hover-color);
+  @apply w-full py-1 px-3 h-11;
+}
+
+.input-box {
+  @apply mb-3;
+}
+
+input[type="submit"],
+button[type="button"],
+button[type="submit"],
+input[type="reset"] {
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+  @apply block px-10 py-2 text-base mx-auto mt-4;
+}
+
+.form-boxed {
+  @apply mx-auto w-full max-w-[600px];
+}
+
+.re-captcha{
+  @apply inline-flex items-center gap-1 rounded-full px-5 font-medium
+}
+.re-captcha label{
+  @apply flex gap-1 items-center whitespace-pre
+}
+.re-captcha input{
+  @apply w-16 shadow-none outline-none !important
+}

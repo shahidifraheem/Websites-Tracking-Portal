@@ -1,0 +1,19 @@
+# Disable directory indexes
+Options -Indexes
+
+# Block execution of certain files
+<FilesMatch "(package-lock|package|tailwind.config|README)\.(json|md|txt|js)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+<FilesMatch "^(\.htaccess|\.gitignore)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Hide .php extension from URLs
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]

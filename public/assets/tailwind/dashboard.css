@@ -1,0 +1,254 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  font-family: "Rubik", sans-serif;
+}
+
+:root {
+  --primary-color: #1d305b;
+  --primary-hover-color: #8eb7e1;
+  --secondary-color: #6bc17c;
+  --secondary-hover-color: #80cf66;
+  --dark-color: rgb(24, 22, 22);
+  --white-color: rgb(255, 255, 255);
+}
+
+::selection {
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-color);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+.title {
+  color: var(--secondary-color);
+  @apply text-4xl font-bold my-5;
+}
+
+label {
+  @apply text-lg block;
+}
+
+input:not(input[type="submit"], input[type="radio"], input[type="checkbox"]),
+select,
+textarea {
+  border: 1px solid var(--primary-color);
+  outline-color: var(--primary-hover-color);
+  @apply w-full py-1 px-3 h-11;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  accent-color: var(--secondary-color);
+  @apply w-5 h-5;
+}
+
+.input-box,
+.input-check-box {
+  @apply mb-3;
+}
+
+.input-check-box {
+  @apply flex flex-wrap gap-5;
+}
+
+.checkbox {
+  @apply flex items-center gap-2 text-lg;
+}
+
+input[type="submit"],
+button[type="button"],
+button[type="submit"],
+input[type="reset"] {
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+  @apply block px-10 py-2 text-base mt-4;
+}
+
+input[type="file"] {
+  @apply leading-7;
+}
+
+.title a {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.normal-title {
+  color: var(--secondary-color);
+  @apply text-2xl font-bold my-1;
+}
+
+.table-container {
+  @apply relative overflow-x-auto;
+}
+
+table {
+  @apply text-center w-full min-w-[600px];
+}
+
+thead {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.thead{
+  background-color: var(--primary-hover-color);
+  color: var(--white-color);
+}
+
+table a{
+  color: var(--secondary-color);
+  @apply underline 
+}
+td,
+th {
+  @apply p-3;
+}
+
+#header {
+  background-color: var(--white-color);
+  @apply fixed top-0 left-0 right-0 w-full shadow-lg py-5 z-50 px-5;
+}
+
+.wrapper{
+  @apply flex justify-between items-center gap-5
+}
+
+.avatar{
+  @apply w-10 h-10 rounded-full
+}
+
+.header-btns{
+  @apply ml-auto
+}
+.user-info{
+  @apply flex items-center gap-2 font-semibold text-2xl underline
+}
+.user-info:hover{
+  color: var(--secondary-color);
+}
+
+#main-wrapper {
+  height: calc(100vh - 15px);
+  @apply flex gap-5 pt-24 px-4;
+}
+
+#sidebar {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  @apply w-[300px] shadow-xl px-5 pt-5 pb-20 rounded-2xl relative;
+}
+
+#content {
+  width: calc(100% - 300px - 20px);
+  @apply relative overflow-y-auto pr-3;
+}
+
+.menu-box {
+  @apply relative overflow-y-auto h-full;
+}
+
+.menu {
+  @apply my-5;
+}
+
+.menu a {
+  background-color: var(--primary-hover-color);
+  color: var(--white-color);
+  @apply text-base px-4 py-2.5 rounded-xl font-medium my-2 flex items-center justify-between transition-all;
+}
+
+.menu a:hover,
+.menu .active > a {
+  background-color: var(--secondary-color);
+}
+
+.sub-menu {
+  @apply pl-4 hidden;
+}
+
+.universal-btn {
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+  @apply inline-block px-8 py-2 transition-all;
+}
+
+.universal-btn:hover {
+  background-color: var(--secondary-hover-color);
+}
+
+.web-btn {
+  @apply absolute bottom-5 left-1/2 -translate-x-1/2 px-5;
+}
+
+.delete-btn,
+.edit-btn {
+  @apply inline-block px-4 py-1 mx-1 bg-red-600 text-white no-underline;
+}
+
+.edit-btn {
+  @apply bg-green-600;
+}
+
+.error-box,.success-box{
+  @apply text-center p-4 text-red-600
+}
+
+.success-box{
+  @apply text-green-600
+}
+
+.title-header{
+  @apply flex items-center justify-between
+}
+
+.checkbox a{
+  @apply flex items-center gap-1
+}
+
+.card-grids{
+  @apply grid grid-cols-2 md:grid-cols-4 gap-5 p-6
+}
+
+.card{
+  @apply p-10 rounded-3xl shadow-xl text-center font-medium text-xl transition-all
+}
+
+.card:hover{
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+}
