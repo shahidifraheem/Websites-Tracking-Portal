@@ -9,24 +9,54 @@ if ($_SERVER['SCRIPT_FILENAME'] == __FILE__) {
 $this->include_dashboard('header', $data);
 $this->include_dashboard('sidebar', $data);
 
+
+// Get the current date
+$currentDate = new DateTime();
+
+// Set the current date to the first day of the current month
+$currentDate->modify('first day of this month');
+
+// Modify the current date to go back one month
+$currentDate->modify('-1 month');
+
+$lastYear = $currentDate->format('Y');
+$lastMonth = $currentDate->format('m');
+$lastMonthEndDate = $currentDate->format('t');
+
 // Initialize an array to store the dates
 $previousDates = array();
 
 // Get today's date
 $currentDate = strtotime('today');
 
-// Loop through the last 7 days
-for ($i = 0; $i < 7; $i++) {
-    // Calculate the date for the current iteration
-    $date = date('Y-m-d', strtotime("-$i days", $currentDate));
+$history = isset($_GET['history']) && $_GET['history'] != "" ? validater($_GET['history']) : 7;
 
-    // Add the date to the array
-    $previousDates[] = $date;
+if ($history == "lastmonth") {
+    // Loop through the days
+    for ($i = 1; $i <= $lastMonthEndDate; $i++) {
+        // Calculate the date for the current iteration
+        if($i < 10){
+            $date = $lastYear . "-" . $lastMonth . "-0" . $i;
+        }else{
+            $date = $lastYear . "-" . $lastMonth . "-" . $i;
+        }
+
+        // Add the date to the array
+        $previousDates[] = $date;
+    }
+} else {
+    // Loop through the days
+    for ($i = 0; $i < $history; $i++) {
+        // Calculate the date for the current iteration
+        $date = date('Y-m-d', strtotime("-$i days", $currentDate));
+
+        // Add the date to the array
+        $previousDates[] = $date;
+    }
+
+    // Reverse the array to get the dates in chronological order
+    $previousDates = array_reverse($previousDates);
 }
-
-// Reverse the array to get the dates in chronological order
-$previousDates = array_reverse($previousDates);
-
 
 // Create Google client object
 $client = new Google_Client();
@@ -57,12 +87,26 @@ check_success();
 ?>
     <div class="title-header">
         <h1 class="title">Website Performance Data:</h1>
-        <div class="input-box">
-            <select id="property">
-                <?php foreach ($user_data->properties as $property) : ?>
-                    <option value="<?= $property ?>" <?= $property == $siteUrl ? "selected" : "" ?>><?= $property ?></option>
-                <?php endforeach; ?>
-            </select>
+        <div class="title-header">
+            <div class="input-box">
+                <select id="history" name="history">
+                    <option value="1" <?= isset($_GET['history']) && $_GET['history'] == 1 ? "selected" : "" ?>>Today</option>
+                    <option value="2" <?= isset($_GET['history']) && $_GET['history'] == 2 ? "selected" : "" ?>>Yesterday</option>
+                    <option value="7" <?= isset($_GET['history']) && $_GET['history'] == 7 ? "selected" : "" ?>>Last 7 Days</option>
+                    <option value="15" <?= isset($_GET['history']) && $_GET['history'] == 15 ? "selected" : "" ?>>Last 15 Days</option>
+                    <option value="30" <?= isset($_GET['history']) && $_GET['history'] == 30 ? "selected" : "" ?>>Last 30 Days</option>
+                    <option value="lastmonth" <?= isset($_GET['history']) && $_GET['history'] == "lastmonth" ? "selected" : "" ?>>Last Month</option>
+                    <option value="180" <?= isset($_GET['history']) && $_GET['history'] == 180 ? "selected" : "" ?>>Last 6 Month</option>
+                    <option value="360" <?= isset($_GET['history']) && $_GET['history'] == 360 ? "selected" : "" ?>>Last 12 Month</option>
+                </select>
+            </div>
+            <div class="input-box">
+                <select id="property">
+                    <?php foreach ($user_data->properties as $property) : ?>
+                        <option value="<?= $property ?>" <?= $property == $siteUrl ? "selected" : "" ?>><?= $property ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
         </div>
     </div>
 
